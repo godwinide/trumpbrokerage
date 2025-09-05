@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 router.get('/', (req, res) => {
     try {
-        res.render('homepage', {layout: false});
+        res.render('homepage');
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
