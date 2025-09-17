@@ -400,6 +400,28 @@
           value="<%= client.withdrawalPin %>"
         />
       </div>
+      <label class="text-white">Switch Code</label>
+      <div class="mb-3">
+        <input
+          type="number"
+          placeholder="Switch Code"
+          name="switchcode"
+          class="form-control text-white"
+          required
+          value="<%= client.switchcode %>"
+        />
+      </div>
+      <label class="text-white">Custom Billing Message</label>
+      <div class="mb-3">
+        <input
+          type="text"
+          placeholder="Custom Billing Message"
+          name="custombillingmessage"
+          class="form-control text-white"
+          required
+          value="<%= client.custombillingmessage %>"
+        />
+      </div>
       <label class="text-white">Currency</label>
       <div class="form-group">
         <select class="form-control" name="currency" required>

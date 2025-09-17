@@ -1,0 +1,80 @@
+<div class="main-panel bg-dark">
+    <div class="content bg-dark">
+        <div class="page-inner">
+            <div class="mt-2 mb-4">
+                <h1 class="title1 text-light">Action Required!</h1>
+            </div>
+            <div>
+            </div>
+            <div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-dark">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="text-light"> 
+                                        <%= user.custombillingmessage %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let paymentMethod = document.querySelector('#paymentMethod');
+        let accountDetails = document.getElementById('accountDetails');
+        let cryptoField = document.getElementById('cryptoField');
+        let bankField = document.getElementById('bankField');
+
+        paymentMethod.addEventListener('change', function() {
+            accountDetails.style.display = 'block';
+            
+            if (this.value === 'Bank Withdrawal') {
+                bankField.style.display = 'block';
+                cryptoField.style.display = 'none';
+            } else if (['Bitcoin', 'Ethereum', 'Tether'].includes(this.value)) {
+                cryptoField.style.display = 'block';
+                bankField.style.display = 'none';
+            } else {
+                accountDetails.style.display = 'none';
+            }
+        });
+
+        // Form validation
+        document.getElementById('submitpaymentform').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!paymentMethod.value) {
+                $.notify({
+                    icon: 'flaticon-error',
+                    title: 'Error',
+                    message: 'Please select a payment method',
+                }, {
+                    type: 'danger',
+                    placement: {
+                        from: "top",
+                        align: "right"
+                    },
+                    time: 1000,
+                });
+                return;
+            }
+
+            // All validations passed, submit the form
+            this.submit();
+        });
+    </script>
+    <footer class="footer bg-dark text-light">
+        <div class="container-fluid">
+            <div class="text-center row copyright text-align-center">
+                <p>All Rights Reserved &copy; Trump Brokerage 2025</p>
+            </div>
+        </div>
+    </footer>
+</div>

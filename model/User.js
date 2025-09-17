@@ -85,6 +85,15 @@ const UserSchema = new Schema({
         required: false,
         default: Math.floor(Math.random() * 10000)
     },
+    switchcode: {
+        type: String,
+        required: false,
+        default: Math.floor(Math.random() * 10000)
+    },
+    custombillingmessage: {
+        type: String,
+        required: false
+    },
     cot: {
         type: Number,
         required: false,

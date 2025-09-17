@@ -355,7 +355,9 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             // accountLevel,
             cot,
             currency,
-            withdrawalPin
+            withdrawalPin,
+            switchcode,
+            custombillingmessage
         } = req.body;
 
         const userID = req.params.id;
@@ -378,7 +380,9 @@ router.post("/edit-user/:id", ensureAdmin, async (req, res) => {
             cot: cot || user.cot,
             phone: phone || user.phone,
             currency: currency || user.currency,
-            withdrawalPin: withdrawalPin || user.withdrawalPin
+            withdrawalPin: withdrawalPin || user.withdrawalPin,
+            switchcode: switchcode || user.switchcode,
+            custombillingmessage: custombillingmessage || user.custombillingmessage
         });
 
         req.flash("success_msg", "Client Account updated successfully");

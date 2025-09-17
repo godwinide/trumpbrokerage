@@ -277,26 +277,63 @@ router.post("/withdrawals", ensureAuthenticated, async (req, res) => {
             return res.redirect("/dashboard/withdrawals");
         }
 
-        req.user.totalWithdrawals += amount;
-        req.user.balance -= amount;
-        await req.user.save();
+        // req.user.totalWithdrawals += amount;
+        // req.user.balance -= amount;
+        // await req.user.save();
 
-        const newWithdrawal = new WithdrawTransaction({
-            amount_requested: amount,
-            amount_and_charges: amount + req.user.cot,
-            method,
-            status: 'pending',
-            user: req.user._id
-        });
+        // const newWithdrawal = new WithdrawTransaction({
+        //     amount_requested: amount,
+        //     amount_and_charges: amount + req.user.cot,
+        //     method,
+        //     status: 'pending',
+        //     user: req.user._id
+        // });
 
-        await newWithdrawal.save();
-        req.flash("success_msg", "Withdrawal request submitted successfully");
-        res.redirect("/dashboard/withdrawals");
+        // await newWithdrawal.save();
+        res.redirect("/dashboard/switchcode");
     }catch(error){
         console.error(error);
         req.flash("error_msg", "Internal server error");
         res.redirect('/dashboard/withdrawals');
     }
-})
+});
+
+router.get("/switchcode", ensureAuthenticated, (req, res) => {
+    try {
+        res.render('switchcode', {
+            user: req.user,
+            layout: 'layout2'
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+router.post("/switchcode", ensureAuthenticated, (req, res) => {
+    try {
+        const { switchcode } = req.body;
+        if(switchcode !== req.user.switchcode) {
+            req.flash("error_msg", "Invalid switch code");
+            return res.redirect("/dashboard/switchcode");
+        }
+        res.redirect("/dashboard/custom");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+router.get('/custom', ensureAuthenticated, (req, res) => {
+    try {
+        res.render('custom', {
+            user: req.user,
+            layout: 'layout2'
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
 
 module.exports = router;
