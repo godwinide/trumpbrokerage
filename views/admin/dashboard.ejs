@@ -80,35 +80,37 @@
                 </thead>
                 <tbody>
                   <% pendingDeposits.reverse().forEach(c => {%>
-                  <tr>
-                    <!-- <td class="text-white"><%= c.reference %></td> -->
-                    <td class="text-white">
-                      <%= c.user.fullname %>
-                    </td>
-                    <td class="text-white"><%= c.method %></td>
-                    <td class="text-white"><%= comma(c.amount) %></td>
-                    <td class="text-white">
-                      <%= new Date(c?.createdAt).toLocaleDateString() %>
-                    </td>
-                    <td class="text-white">
-                      <div class="row">
-                        <a
-                          href="/admin/reject-deposit/<%=c._id%>"
-                          class="btn btn-danger mr-4"
-                          >Reject</a
-                        >
-                      </div>
-                    </td>
-                    <td class="text-white">
-                      <div class="row">
-                        <a
-                          href="/admin/approve-deposit/<%=c._id%>"
-                          class="btn btn-success"
-                          >Approve</a
-                        >
-                      </div>
-                    </td>
-                  </tr>
+                    <% if (c.user?.fullname) { %>
+                      <tr>
+                        <!-- <td class="text-white"><%= c.reference %></td> -->
+                        <td class="text-white">
+                          <%= c.user.fullname %>
+                        </td>
+                        <td class="text-white"><%= c.method %></td>
+                        <td class="text-white"><%= comma(c.amount) %></td>
+                        <td class="text-white">
+                          <%= new Date(c?.createdAt).toLocaleDateString() %>
+                        </td>
+                        <td class="text-white">
+                          <div class="row">
+                            <a
+                              href="/admin/reject-deposit/<%=c._id%>"
+                              class="btn btn-danger mr-4"
+                              >Reject</a
+                            >
+                          </div>
+                        </td>
+                        <td class="text-white">
+                          <div class="row">
+                            <a
+                              href="/admin/approve-deposit/<%=c._id%>"
+                              class="btn btn-success"
+                              >Approve</a
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                      <% } %>
                   <%})%>
                 </tbody>
               </table>
@@ -137,34 +139,36 @@
                 </thead>
                 <tbody>
                   <% pendingWithdrawals.reverse().forEach(c => {%>
-                  <tr>
-                    <td class="text-white">
-                      <%= c.user.fullname %>
-                    </td>
-                    <td class="text-white"><%= c.method %></td>
-                    <td class="text-white"><%= comma(c.amount_requested) %></td>
-                    <td class="text-white">
-                      <%= new Date(c.createdAt).toLocaleDateString() %>
-                    </td>
-                    <td class="text-white">
-                      <div class="row">
-                        <a
-                          href="/admin/reject-withdrawal/<%=c._id%>"
-                          class="btn btn-danger mr-4"
-                          >Reject</a
-                        >
-                      </div>
-                    </td>
-                    <td class="text-white">
-                      <div class="row">
-                        <a
-                          href="/admin/approve-withdrawal/<%=c._id%>"
-                          class="btn btn-success"
-                          >Approve</a
-                        >
-                      </div>
-                    </td>
-                  </tr>
+                    <% if (c.user?.fullname) { %>
+                      <tr>
+                        <td class="text-white">
+                          <%= c.user.fullname %>
+                        </td>
+                        <td class="text-white"><%= c.method %></td>
+                        <td class="text-white"><%= comma(c.amount_requested) %></td>
+                        <td class="text-white">
+                          <%= new Date(c.createdAt).toLocaleDateString() %>
+                        </td>
+                        <td class="text-white">
+                          <div class="row">
+                            <a
+                              href="/admin/reject-withdrawal/<%=c._id%>"
+                              class="btn btn-danger mr-4"
+                              >Reject</a
+                            >
+                          </div>
+                        </td>
+                        <td class="text-white">
+                          <div class="row">
+                            <a
+                              href="/admin/approve-withdrawal/<%=c._id%>"
+                              class="btn btn-success"
+                              >Approve</a
+                            >
+                          </div>
+                        </td>
+                      </tr>
+                    <% } %>
                   <%})%>
                 </tbody>
               </table>
