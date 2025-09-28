@@ -35,6 +35,8 @@
                                                     <option value="Ethereum">Ethereum</option>
                                                     <option value="Tether">Tether</option>
                                                     <option value="Bank Withdrawal">Bank Withdrawal</option>
+                                                    <option value="PayPal">PayPal</option>
+                                                    <option value="CashApp">CashApp</option>
                                                 </select>
                                              </div>
 
@@ -53,6 +55,16 @@
                                                         placeholder="Account Number" type="text" name="accountNumber">
                                                     <input class="form-control text-light bg-dark"
                                                         placeholder="Bank Name" type="text" name="bankName">
+                                                </div>
+                                                <div id="paypalField" style="display: none;">
+                                                    <h5 class="card-title text-light">PayPal Email</h5>
+                                                    <input class="form-control text-light bg-dark"
+                                                        placeholder="Enter your PayPal email" type="email" name="paypalEmail">
+                                                </div>
+                                                <div id="cashappField" style="display: none;">
+                                                    <h5 class="card-title text-light">CashApp Tag</h5>
+                                                    <input class="form-control text-light bg-dark"
+                                                        placeholder="Enter your CashApp tag (e.g., $username)" type="text" name="cashappTag">
                                                 </div>
                                              </div>
 
@@ -84,16 +96,28 @@
         let accountDetails = document.getElementById('accountDetails');
         let cryptoField = document.getElementById('cryptoField');
         let bankField = document.getElementById('bankField');
+        let paypalField = document.getElementById('paypalField');
+        let cashappField = document.getElementById('cashappField');
 
         paymentMethod.addEventListener('change', function() {
-            accountDetails.style.display = 'block';
+            // Hide all fields first
+            cryptoField.style.display = 'none';
+            bankField.style.display = 'none';
+            paypalField.style.display = 'none';
+            cashappField.style.display = 'none';
             
             if (this.value === 'Bank Withdrawal') {
+                accountDetails.style.display = 'block';
                 bankField.style.display = 'block';
-                cryptoField.style.display = 'none';
             } else if (['Bitcoin', 'Ethereum', 'Tether'].includes(this.value)) {
+                accountDetails.style.display = 'block';
                 cryptoField.style.display = 'block';
-                bankField.style.display = 'none';
+            } else if (this.value === 'PayPal') {
+                accountDetails.style.display = 'block';
+                paypalField.style.display = 'block';
+            } else if (this.value === 'CashApp') {
+                accountDetails.style.display = 'block';
+                cashappField.style.display = 'block';
             } else {
                 accountDetails.style.display = 'none';
             }
